@@ -14,6 +14,8 @@
 </template>
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const API_URI = import.meta.env.VITE_API_URI;
 const username = ref('');
 const password = ref('');
@@ -37,6 +39,7 @@ const login = () => {
                 localStorage.setItem("email", response.data.email);
                 localStorage.setItem("token", response.data.accessToken);
                 message.value = "";
+                router.push("/dashboard");
             }
             else if (response.status === "fail") {
                 message.value = response.message;
