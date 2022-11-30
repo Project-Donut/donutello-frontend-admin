@@ -1,8 +1,8 @@
 <template>
     <div class="login">
-        <label for="username">Username</label>
+        <label for="username">Gebruikersnaam</label>
         <input type="text" id="username" v-model="username" />
-        <label for="password">Password</label>
+        <label for="password">Wachtwoord</label>
         <input type="password" id="password" v-model="password" />
         <button @click="login">Login</button>
     </div>
