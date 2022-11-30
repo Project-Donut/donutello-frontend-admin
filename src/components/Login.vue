@@ -9,6 +9,7 @@
 </template>
 <script setup>
 import { ref } from 'vue';
+const API_URI = import.meta.env.VITE_API_URI;
 const username = ref('');
 const password = ref('');
 
