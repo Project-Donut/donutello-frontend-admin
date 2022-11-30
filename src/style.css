@@ -105,4 +105,5 @@ h1, h2, h3, h4, h5, h6 {
 .error-message {
     /* Style Error Message */
     color: var(--basic-error);
+    margin: 0px;
 }
