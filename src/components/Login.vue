@@ -17,14 +17,10 @@ const login = () => {
     throw new Error('Not implemented');
 }
 </script>
-<style scoped lang="scss">
+<style scoped>
 .login {
     display: flex;
     flex-direction: column;
-    height: 100vh;
     width: 230px;
-    input {
-        margin-bottom: 1em;
-    }
 }
 </style>
