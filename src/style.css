@@ -1,3 +1,108 @@
-input {
-    margin-bottom: 1em;
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600;700&family=Lato:ital@0;1&display=swap');
+
+:root {
+    --body: #212529;
+    --gray-1: #424548;
+    --gray-2: #53565b;
+    --gray-3: #6b6d72;
+    --gray-4: #808286;
+    --gray-5: #97989d;
+    --gray-6: #a9acb4;
+    --gray-7: #bec0c5;
+    --gray-8: #dcdee4;
+
+    --basic-error: #f44336;
+    --basic-info: #2196f3;
+    --basic-success: #4caf50;
+    --basic-warning: #ff9800;
+    --basic-error-dark: #bf2b2b;
+    --basic-info-dark: #1564b2;
+    --basic-success-dark: #338237;
+    --basic-warning-dark: #cb6600;
+
+    
+    --primary-strawberry: rgb(231, 44, 112);
+    --secondary-strawberry: rgb(255, 76, 142);
+    --pastel-strawberry: rgb(255, 152, 190);
+
+    --primary-heaven: rgb(130, 209, 228);
+    --secondary-heaven: rgb(96, 209, 214);
+    --pastel-heaven: rgb(202, 227, 232);
+
+    --primary-lemon: rgb(247, 242, 73);
+    --secondary-lemon: rgb(247, 226, 0);
+    --pastel-lemon: rgb(248, 245, 148);
+
+    --font-size-regular: 18px;
+    --font-size-large-1: 24px;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-size: var(--font-size-regular);
+    color: var(--body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Dosis', sans-serif;
+}
+
+.button {
+    font-family: 'Dosis', sans-serif;
+    font-size: var(--font-size-regular);
+    text-transform: uppercase;
+    background-color: var(--primary-strawberry);
+    border: none;
+    color: white;
+    padding: .5em;
+    border-radius: 8px;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.button--large {
+    padding: 1em;
+    font-size: var(--font-size-large-1);
+}
+
+.button--lemon {
+    background-color: var(--primary-lemon);
+    color: var(--body);
+}
+
+.button--heaven {
+    background-color: var(--primary-heaven);
+}
+
+.input {
+    /* Style Input */
+    font-family: 'Lato', sans-serif;
+    font-size: var(--font-size-regular);
+    border: 2px solid var(--gray-7);
+    border-radius: 8px;
+    padding: .5em;
+    margin-bottom: .5em;
+}
+
+.input:focus {
+    /* Custom Outline */
+    outline: var(--primary-heaven) solid 2px;
+}
+
+.label {
+    /* Style Label */
+    font-family: 'Dosis', sans-serif;
+    font-size: var(--font-size-regular);
+    margin-bottom: .5em;
+}
+
+.form-group:last-of-type {
+    margin-bottom: .75em;
+}
+
+.error-message {
+    /* Style Error Message */
+    color: var(--basic-error);
 }
