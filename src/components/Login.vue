@@ -1,8 +1,8 @@
 <template>
     <div class="login">
-        <label for="username">Username</label>
+        <label for="username">Gebruikersnaam</label>
         <input type="text" id="username" v-model="username" />
-        <label for="password">Password</label>
+        <label for="password">Wachtwoord</label>
         <input type="password" id="password" v-model="password" />
         <button @click="login">Login</button>
     </div>
@@ -14,7 +14,22 @@ const username = ref('');
 const password = ref('');
 
 const login = () => {
-    throw new Error('Not implemented');
+    fetch(`${API_URI}/auth/signin`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            username: username.value,
+            password: password.value,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("email", data.email);
+            localStorage.setItem("token", data.accessToken);
+        });
 }
 </script>
 <style scoped>
