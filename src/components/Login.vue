@@ -13,13 +13,19 @@
     </div>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const API_URI = import.meta.env.VITE_API_URI;
 const username = ref('');
 const password = ref('');
 const message = ref('');
+
+onMounted(() => {
+    if (localStorage.getItem('token')) {
+        router.push('/dashboard');
+    }
+});
 
 const login = () => {
     fetch(`${API_URI}/auth/signin`, {
