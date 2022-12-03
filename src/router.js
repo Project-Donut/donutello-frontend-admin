@@ -1,4 +1,4 @@
-import { createWebHistory, createRouter } from 'vue-router';
+import { createWebHistory, createRouter } from "vue-router";
 
 import DashboardView from "./views/DashboardView.vue";
 import HomeView from "./views/HomeView.vue";
@@ -10,7 +10,7 @@ const routes = [
         component: HomeView,
     },
     {
-        path: "/dashboard",
+        path: "/app",
         name: "Dashboard",
         component: DashboardView,
     },
@@ -19,6 +19,14 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
+});
+
+router.beforeEach((to, from, next) => {
+    console.log(to.path, to.path.startsWith("/app"));
+    if (to.path.startsWith("/app") && !localStorage.getItem("token")) {
+        next("/");
+    }
+    next();
 });
 
 export default router;

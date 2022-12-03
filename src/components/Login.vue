@@ -23,7 +23,7 @@ const message = ref('');
 
 onMounted(() => {
     if (localStorage.getItem('token')) {
-        router.push('/dashboard');
+        router.push('/app');
     }
 });
 
@@ -45,7 +45,7 @@ const login = () => {
                 localStorage.setItem("email", response.data.email);
                 localStorage.setItem("token", response.data.accessToken);
                 message.value = "";
-                router.push("/dashboard");
+                router.push("/app");
             }
             else if (response.status === "fail") {
                 message.value = response.message;
