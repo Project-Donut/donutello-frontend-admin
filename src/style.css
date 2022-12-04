@@ -9,7 +9,7 @@
     --gray-5: #97989d;
     --gray-6: #a9acb4;
     --gray-7: #bec0c5;
-    --gray-8: #dcdee4;
+    --gray-8: #f0f0f0;
 
     --basic-error: #f44336;
     --basic-info: #2196f3;
@@ -41,6 +41,7 @@ body {
     font-family: 'Lato', sans-serif;
     font-size: var(--font-size-regular);
     color: var(--body);
+    background-color: var(--gray-8);
 }
 
 h1, h2, h3, h4, h5, h6 {
