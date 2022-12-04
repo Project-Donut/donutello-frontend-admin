@@ -25,7 +25,7 @@
     --basic-info-fade: rgb(33, 150, 243, 0.25);
     --basic-success-fade: rgb(76, 175, 80, 0.25);
     --basic-warning-fade: rgb(255, 152, 0, 0.25);
-    
+
     --primary-strawberry: rgb(231, 44, 112);
     --primary-strawberry-fade: rgba(231, 44, 113, 0.25);
     --primary-strawberry-dark: rgb(206, 35, 97);
@@ -57,7 +57,12 @@ body {
     background-color: var(--gray-8);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Dosis', sans-serif;
 }
 
@@ -65,13 +70,17 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Dosis', sans-serif;
     font-size: var(--font-size-regular);
     text-transform: uppercase;
+
     background-color: var(--primary-strawberry);
-    border: none;
     color: white;
+
+    min-width: 40px;
     padding: .5em;
+    border: none;
     border-radius: 8px;
-    transition: all .2s ease-in-out;
+
     cursor: pointer;
+    transition: all .2s ease-in-out;
 }
 
 .button:hover {
@@ -159,16 +168,67 @@ h1, h2, h3, h4, h5, h6 {
 table {
     width: 100%;
     border-collapse: collapse;
+    overflow-x: scroll;
+    border-collapse: separate;
+    border-spacing: 0;
 }
-table, th, td {
-    border: 2px solid var(--gray-7);
+
+table,
+th,
+td {
+    border: 1px solid var(--gray-7);
+    background-color: var(--gray-8);
 }
-td, th {
+
+td,
+th {
     padding: 0.5em;
     min-width: 100px;
     text-align: left;
 }
+
 th {
     background-color: var(--gray-7);
     border-color: var(--gray-6);
+}
+
+th.sticky,
+td.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+th.right,
+td.right {
+    right: 0px;
+}
+
+th.right::before,
+td.right::before {
+    content: ' ';
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: -8px;
+    width: 8px;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0), rgba(71, 78, 79, 0.25));
+}
+
+th.left,
+td.left {
+    left: 0px;
+}
+
+th.left::after,
+td.left::after {
+    content: ' ';
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    right: -8px;
+    width: 8px;
+    height: 100%;
+    background: linear-gradient(to left, rgba(0,0,0,0), rgba(71, 78, 79, 0.25));
 }
