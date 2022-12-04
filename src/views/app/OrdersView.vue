@@ -2,13 +2,13 @@
     <table>
         <thead>
             <tr>
-                <th>Index</th>
+                <th></th>
                 <th>Afbeelding</th>
                 <th>Naam</th>
                 <th>Adres</th>
                 <th>Datum Levering</th>
                 <th>Besteld Op</th>
-                <th>Acties</th>
+                <th class="sticky right">Acties</th>
             </tr>
         </thead>
         <tbody>
@@ -19,9 +19,11 @@
                 <td>{{ order.address }}</td>
                 <td>{{ order.order.byDate.toLocaleDateString() }}</td>
                 <td>{{ order.createdDate.toLocaleDateString() }}</td>
-                <td>
+                <td class="sticky right">
                     <button class="button button--heaven">Volgende</button>
-                    <button class="button button--danger">Verwijder</button>
+                    <button class="button button--danger">
+                        <font-awesome-icon icon="trash" />
+                    </button>
                 </td>
             </tr>
         </tbody>
@@ -51,7 +53,11 @@ const orders = [
 </script>
 <style scoped>
 td:first-of-type, th:first-of-type {
-    min-width: 50px;
+    min-width: 2em;
+    text-align: center;
+}
+
+td:last-of-type, th:last-of-type {
     text-align: center;
 }
 </style>
