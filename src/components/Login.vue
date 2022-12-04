@@ -37,9 +37,6 @@ const focusNext = (event) => {
             case 'password':
                 login();
                 break;
-            default:
-                focusElement('username');
-                break;
         }
     }
 };
