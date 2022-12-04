@@ -1,35 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600;700&family=Lato:ital@0;1&display=swap');
 
 :root {
-    --body: #212529;
-    --gray-1: #424548;
-    --gray-2: #53565b;
-    --gray-3: #6b6d72;
-    --gray-4: #808286;
-    --gray-5: #97989d;
-    --gray-6: #a9acb4;
-    --gray-7: #bec0c5;
-    --gray-8: #f0f0f0;
+    --body: rgb(33, 37, 41);
+    --gray-1: rgb(66, 69, 72);
+    --gray-2: rgb(83, 86, 91);
+    --gray-3: rgb(107, 109, 114);
+    --gray-4: rgb(128, 130, 134);
+    --gray-5: rgb(151, 152, 157);
+    --gray-6: rgb(169, 172, 180);
+    --gray-7: rgb(190, 192, 197);
+    --gray-8: rgb(240, 240, 240);
 
-    --basic-error: #f44336;
-    --basic-info: #2196f3;
-    --basic-success: #4caf50;
-    --basic-warning: #ff9800;
-    --basic-error-dark: #bf2b2b;
-    --basic-info-dark: #1564b2;
-    --basic-success-dark: #338237;
-    --basic-warning-dark: #cb6600;
+    --basic-error: rgb(244, 67, 54);
+    --basic-info: rgb(33, 150, 243);
+    --basic-success: rgb(76, 175, 80);
+    --basic-warning: rgb(255, 152, 0);
 
+    --basic-error-dark: rgb(191, 43, 43);
+    --basic-info-dark: rgb(21, 100, 178);
+    --basic-success-dark: rgb(51, 130, 55);
+    --basic-warning-dark: rgb(203, 102, 0);
+
+    --basic-error-fade: rgb(244, 67, 54, 0.25);
+    --basic-info-fade: rgb(33, 150, 243, 0.25);
+    --basic-success-fade: rgb(76, 175, 80, 0.25);
+    --basic-warning-fade: rgb(255, 152, 0, 0.25);
     
     --primary-strawberry: rgb(231, 44, 112);
+    --primary-strawberry-fade: rgba(231, 44, 113, 0.25);
+    --primary-strawberry-dark: rgb(206, 35, 97);
     --secondary-strawberry: rgb(255, 76, 142);
     --pastel-strawberry: rgb(255, 152, 190);
+    --pastel-strawberry: rgb(236, 132, 170);
 
     --primary-heaven: rgb(130, 209, 228);
+    --primary-heaven-dark: rgb(107, 183, 202);
+    --primary-heaven-fade: rgba(130, 209, 228, 0.25);
     --secondary-heaven: rgb(96, 209, 214);
     --pastel-heaven: rgb(202, 227, 232);
+    --pastel-heaven-dark: rgb(175, 203, 210);
 
     --primary-lemon: rgb(247, 242, 73);
+    --primary-lemon-dark: rgb(208, 203, 57);
+    --primary-lemon-fade: rgba(247, 242, 73, 0.25);
     --secondary-lemon: rgb(247, 226, 0);
     --pastel-lemon: rgb(248, 245, 148);
 
@@ -57,15 +70,16 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     padding: .5em;
     border-radius: 8px;
-}
-
-.button:hover {
+    transition: all .2s ease-in-out;
     cursor: pointer;
 }
 
-.button--large {
-    padding: 1em;
-    font-size: var(--font-size-large-1);
+.button:hover {
+    background-color: var(--primary-strawberry-dark);
+}
+
+.button:focus {
+    outline: .15em solid var(--primary-strawberry-fade);
 }
 
 .button--lemon {
@@ -73,8 +87,41 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--body);
 }
 
+.button--lemon:hover {
+    background-color: var(--primary-lemon-dark);
+}
+
+.button--lemon:focus {
+    outline: .15em solid var(--primary-lemon-fade);
+}
+
 .button--heaven {
     background-color: var(--primary-heaven);
+}
+
+.button--heaven:hover {
+    background-color: var(--primary-heaven-dark);
+}
+
+.button--heaven:focus {
+    outline: .15em solid var(--primary-heaven-fade);
+}
+
+.button--danger {
+    background-color: var(--basic-error);
+}
+
+.button--danger:hover {
+    background-color: var(--basic-error-dark);
+}
+
+.button--danger:focus {
+    outline: .15em solid var(--basic-error-fade);
+}
+
+.button--large {
+    padding: 1em;
+    font-size: var(--font-size-large-1);
 }
 
 .input {
@@ -107,4 +154,21 @@ h1, h2, h3, h4, h5, h6 {
     /* Style Error Message */
     color: var(--basic-error);
     margin: 0px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 2px solid var(--gray-7);
+}
+td, th {
+    padding: 0.5em;
+    min-width: 100px;
+    text-align: left;
+}
+th {
+    background-color: var(--gray-7);
+    border-color: var(--gray-6);
 }

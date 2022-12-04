@@ -21,7 +21,7 @@
                 <td>{{ order.createdDate.toLocaleDateString() }}</td>
                 <td>
                     <button class="button button--heaven">Volgende</button>
-                    <button class="button">Verwijder</button>
+                    <button class="button button--danger">Verwijder</button>
                 </td>
             </tr>
         </tbody>
@@ -50,18 +50,6 @@ const orders = [
 ]
 </script>
 <style scoped>
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-table, th, td {
-    border: 1px solid black;
-}
-td, th {
-    padding: 0.5em;
-    min-width: 100px;
-    text-align: left;
-}
 td:first-of-type, th:first-of-type {
     min-width: 50px;
     text-align: center;
