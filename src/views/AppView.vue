@@ -4,11 +4,10 @@ import { RouterView } from 'vue-router';
 
 <template>
     <div>
-        <h1>Dashboard</h1>
         <RouterView></RouterView>
     </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 
 </style>

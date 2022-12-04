@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 
-import DashboardView from "./views/DashboardView.vue";
+import AppView from "./views/AppView.vue";
 import HomeView from "./views/HomeView.vue";
 
 const routes = [
@@ -11,8 +11,10 @@ const routes = [
     },
     {
         path: "/app",
-        name: "Dashboard",
-        component: DashboardView,
+        name: "App",
+        component: AppView,
+        children: [
+        ]
     },
 ];
 
