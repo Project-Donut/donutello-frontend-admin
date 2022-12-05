@@ -44,7 +44,6 @@ router.beforeEach((to, from, next) => {
             })
                 .then((response) => response.json())
                 .then((response) => {
-                    console.log(token, );
                     if (response.message === "Unauthorized!") {
                         localStorage.removeItem("token");
                         location.reload();

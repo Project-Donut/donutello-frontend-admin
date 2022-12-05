@@ -15,10 +15,10 @@
             <tr v-for="(order, index) in orders" :key="order.id">
                 <td>{{ index }}</td>
                 <td><img /></td>
-                <td>{{ order.name }}</td>
-                <td>{{ order.address }}</td>
-                <td>{{ order.order.byDate.toLocaleDateString() }}</td>
-                <td>{{ order.createdDate.toLocaleDateString() }}</td>
+                <td>{{ order.customer.company || `${order.customer.lastName} ${order.customer.firstName}` }}</td>
+                <td>{{ `${order.address.street}, ${order.address.postalCode} ${order.address.city}, ${order.address.country}` }}</td>
+                <td></td>
+                <td>{{ (new Date(order.createdAt)).toLocaleDateString() }}</td>
                 <td class="sticky right">
                     <button class="button button--heaven">Volgende</button>
                     <button class="button button--danger">
@@ -30,26 +30,17 @@
     </table>
 </template>
 <script setup>
-const orders = [
-    {
-        name: "John Doe",
-        address: "Straat 1, 1234 AB, Plaats",
-        phone: "0612345678",
-        order: {
-            glaze_colour: "paars",
-            glaze_taste: "aardbei",
-            toppings: {
-                kind: "sprinkles",
-                colour: "roze",
-                taste: "aardbei",
-            },
-            filling: "aardbei",
-            count: 70,
-            byDate: new Date("2023-10-20T00:00:00.000Z"),
-        },
-        createdDate: new Date("2022-12-04T00:00:00.000Z"),
+import { reactive, onMounted } from 'vue';
+import { getOrders } from '../../api/order';
+
+const orders = reactive([]);
+onMounted(async () => {
+    const result = await getOrders();
+    if (result.status === "success") {
+        orders.push(...result.data);
     }
-]
+});
+
 </script>
 <style scoped>
 td:first-of-type, th:first-of-type {
