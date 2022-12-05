@@ -20,7 +20,7 @@ const routes = [
                 name: "Orders",
                 component: OrdersView,
             },
-        ]
+        ],
     },
 ];
 
@@ -30,9 +30,27 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    console.log(to.path, to.path.startsWith("/app"));
-    if (to.path.startsWith("/app") && !localStorage.getItem("token")) {
-        next("/");
+    if (to.path.startsWith("/app")) {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            next("/");
+        } else {
+            const API_URI = import.meta.env.VITE_API_URI;
+            fetch(`${API_URI}/auth/verify`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-access-token": token,
+                },
+            })
+                .then((response) => response.json())
+                .then((response) => {
+                    console.log(token, );
+                    if (response.message === "Unauthorized!") {
+                        localStorage.removeItem("token");
+                        location.reload();
+                    }
+                });
+        }
     }
     next();
 });
