@@ -5,9 +5,7 @@
                 <th>Status</th>
                 <th>Afbeelding</th>
                 <th>Naam</th>
-                <th>Adres</th>
                 <th>Datum Levering</th>
-                <th>Besteld Op</th>
                 <th class="sticky right">Acties</th>
             </tr>
         </thead>
@@ -16,9 +14,7 @@
                 <td :class="`status--${order.status}`" >{{ order.status }}</td>
                 <td><img /></td>
                 <td>{{ order.customer.company || `${order.customer.lastName} ${order.customer.firstName}` }}</td>
-                <td>{{ `${order.address.street}, ${order.address.postalCode} ${order.address.city}, ${order.address.country}` }}</td>
                 <td>{{ (new Date(order.dateBy)).toLocaleDateString()}}</td>
-                <td>{{ (new Date(order.createdAt)).toLocaleDateString() }}</td>
                 <td class="sticky right">
                     <button class="button button--heaven">Volgende</button>
                     <button class="button button--danger">
