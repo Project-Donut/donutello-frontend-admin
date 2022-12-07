@@ -1,29 +1,23 @@
 <template>
-    <table>
-        <thead>
-            <tr>
-                <th>Status</th>
-                <th>Afbeelding</th>
-                <th>Naam</th>
-                <th>Datum Levering</th>
-                <th class="sticky right">Acties</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(order) in orders" :key="order.id">
-                <td :class="`status--${order.status}`">{{ order.status }}</td>
-                <td><img /></td>
-                <td>{{ order.customer.company || `${order.customer.lastName} ${order.customer.firstName}` }}</td>
-                <td>{{ (new Date(order.dateBy)).toLocaleDateString() }}</td>
-                <td class="sticky right">
-                    <button class="button button--heaven">Volgende</button>
-                    <button class="button button--danger">
-                        <font-awesome-icon icon="trash" />
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <DataTable :value="orders" >
+        <Column header="Status" field="status" ></Column>
+        <Column header=" ">
+            <template #body="slotProps">
+                <img :src="slotProps.data.customer.fullName" alt="Custom donut"/>
+            </template>
+        </Column>
+        <Column header="Naam" field="customer.fullName" ></Column>
+        <Column header="Adres" field="address.fullAddress" ></Column>
+        <Column header="Leverdatum" field="dateBy" ></Column>
+        <Column header="Acties">
+            <template #body="slotProps">
+                <button v-if="slotProps.data.status === 'pending'" class="button button--heaven">Start</button>
+                <button v-if="slotProps.data.status === 'processing'" class="button button--lemon">Verstuur</button>
+                <button v-if="slotProps.data.status === 'shipped'" class="button">Afronden</button>
+                <button class="button button--error"></button>
+            </template>
+        </Column>
+    </DataTable>
 </template>
 <script setup>
 import { reactive, onMounted } from 'vue';
@@ -41,35 +35,4 @@ onMounted(async () => {
 
 </script>
 <style scoped>
-table {
-    max-height: 100%;
-    overflow: auto;
-}
-
-td:first-of-type,
-th:first-of-type {
-    min-width: 2em;
-    text-align: center;
-}
-
-td:last-of-type,
-th:last-of-type {
-    text-align: center;
-}
-
-td.status--delivered {
-    background-color: var(--basic-success-light);
-}
-
-td.status--processing {
-    background-color: var(--basic-warning-light);
-}
-
-td.status--shipped {
-    background-color: var(--basic-info-light);
-}
-
-td.status--cancelled {
-    background-color: var(--basic-danger-light);
-}
 </style>
