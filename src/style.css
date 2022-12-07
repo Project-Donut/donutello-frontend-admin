@@ -60,6 +60,7 @@ body {
     font-size: var(--font-size-regular);
     color: var(--body);
     background-color: var(--gray-8);
+    margin: 0px;
 }
 
 h1,

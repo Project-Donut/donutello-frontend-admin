@@ -11,10 +11,10 @@
         </thead>
         <tbody>
             <tr v-for="(order) in orders" :key="order.id">
-                <td :class="`status--${order.status}`" >{{ order.status }}</td>
+                <td :class="`status--${order.status}`">{{ order.status }}</td>
                 <td><img /></td>
                 <td>{{ order.customer.company || `${order.customer.lastName} ${order.customer.firstName}` }}</td>
-                <td>{{ (new Date(order.dateBy)).toLocaleDateString()}}</td>
+                <td>{{ (new Date(order.dateBy)).toLocaleDateString() }}</td>
                 <td class="sticky right">
                     <button class="button button--heaven">Volgende</button>
                     <button class="button button--danger">
@@ -41,12 +41,19 @@ onMounted(async () => {
 
 </script>
 <style scoped>
-td:first-of-type, th:first-of-type {
+table {
+    max-height: 100%;
+    overflow: auto;
+}
+
+td:first-of-type,
+th:first-of-type {
     min-width: 2em;
     text-align: center;
 }
 
-td:last-of-type, th:last-of-type {
+td:last-of-type,
+th:last-of-type {
     text-align: center;
 }
 
