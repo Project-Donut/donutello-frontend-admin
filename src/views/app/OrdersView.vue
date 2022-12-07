@@ -17,7 +17,7 @@
                 <td><img /></td>
                 <td>{{ order.customer.company || `${order.customer.lastName} ${order.customer.firstName}` }}</td>
                 <td>{{ `${order.address.street}, ${order.address.postalCode} ${order.address.city}, ${order.address.country}` }}</td>
-                <td></td>
+                <td>{{ (new Date(order.dateBy)).toLocaleDateString()}}</td>
                 <td>{{ (new Date(order.createdAt)).toLocaleDateString() }}</td>
                 <td class="sticky right">
                     <button class="button button--heaven">Volgende</button>
