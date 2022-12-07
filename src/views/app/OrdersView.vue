@@ -2,7 +2,7 @@
     <table>
         <thead>
             <tr>
-                <th></th>
+                <th>Status</th>
                 <th>Afbeelding</th>
                 <th>Naam</th>
                 <th>Adres</th>
@@ -12,8 +12,8 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(order, index) in orders" :key="order.id">
-                <td>{{ index }}</td>
+            <tr v-for="(order) in orders" :key="order.id">
+                <td>{{ order.status }}</td>
                 <td><img /></td>
                 <td>{{ order.customer.company || `${order.customer.lastName} ${order.customer.firstName}` }}</td>
                 <td>{{ `${order.address.street}, ${order.address.postalCode} ${order.address.city}, ${order.address.country}` }}</td>
@@ -38,6 +38,8 @@ onMounted(async () => {
     const result = await getOrders();
     if (result.status === "success") {
         orders.push(...result.data);
+        // sort by priority
+        orders.sort((a, b) => (a.priority < b.priority) ? 1 : ((b.priority < a.priority) ? -1 : 0));
     }
 });
 
