@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <tr v-for="(order) in orders" :key="order.id">
-                <td>{{ order.status }}</td>
+                <td :class="`status--${order.status}`" >{{ order.status }}</td>
                 <td><img /></td>
                 <td>{{ order.customer.company || `${order.customer.lastName} ${order.customer.firstName}` }}</td>
                 <td>{{ `${order.address.street}, ${order.address.postalCode} ${order.address.city}, ${order.address.country}` }}</td>
@@ -52,5 +52,21 @@ td:first-of-type, th:first-of-type {
 
 td:last-of-type, th:last-of-type {
     text-align: center;
+}
+
+td.status--delivered {
+    background-color: var(--basic-success-light);
+}
+
+td.status--processing {
+    background-color: var(--basic-warning-light);
+}
+
+td.status--shipped {
+    background-color: var(--basic-info-light);
+}
+
+td.status--cancelled {
+    background-color: var(--basic-danger-light);
 }
 </style>

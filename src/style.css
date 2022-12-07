@@ -21,6 +21,11 @@
     --basic-success-dark: rgb(51, 130, 55);
     --basic-warning-dark: rgb(203, 102, 0);
 
+    --basic-error-light: rgb(255, 125, 125);
+    --basic-info-light: rgb(129, 186, 243);
+    --basic-success-light: rgb(123, 244, 129);
+    --basic-warning-light: rgb(253, 182, 95);
+
     --basic-error-fade: rgb(244, 67, 54, 0.25);
     --basic-info-fade: rgb(33, 150, 243, 0.25);
     --basic-success-fade: rgb(76, 175, 80, 0.25);
