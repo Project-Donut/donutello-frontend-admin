@@ -25,5 +25,13 @@ import { RouterView } from 'vue-router';
 
 .content-wrapper {
     overflow: auto;
+    margin: 0px auto;
+    width: 1200px;
+}
+
+@media (max-width: 1200px) {
+    .content-wrapper {
+        width: 100%;
+    }
 }
 </style>
