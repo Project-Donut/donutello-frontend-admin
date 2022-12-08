@@ -1,0 +1,136 @@
+.button {
+    font-family: 'Dosis', sans-serif;
+    font-size: var(--font-size-regular);
+    text-transform: uppercase;
+
+    background-color: var(--primary-heaven);
+    color: white;
+
+    min-width: 40px;
+    padding: .5em;
+    border: none;
+    border-radius: 8px;
+
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.button:hover {
+    background-color: var(--primary-heaven-dark);
+}
+
+.button:focus {
+    outline: .15em solid var(--primary-heaven-fade);
+}
+
+.button--large {
+    padding: 1em;
+    font-size: var(--font-size-large-1);
+}
+
+/* Button subtle */
+.button--subtle {
+    color: var(--primary-heaven);
+    background-color: white;
+}
+
+.button--subtle:hover {
+    color: white;
+    background-color: var(--primary-heaven);
+}
+
+.button--subtle:focus {
+    outline: .15em solid var(--primary-heaven-fade);
+}
+
+/* Button info */
+.button--info {
+    background-color: var(--basic-info);
+}
+
+.button--info:hover {
+    background-color: var(--basic-info-dark);
+}
+
+.button--info:focus {
+    outline: .15em solid var(--basic-info-fade);
+}
+
+.button--info.button--subtle {
+    color: var(--basic-info);
+    background-color: white;
+}
+
+.button--info.button--subtle:hover {
+    color: white;
+    background-color: var(--basic-info);
+}
+
+/* Button success */
+.button--success {
+    background-color: var(--basic-success);
+}
+
+.button--success:hover {
+    background-color: var(--basic-success-dark);
+}
+
+.button--success:focus {
+    outline: .15em solid var(--basic-success-fade);
+}
+
+.button--success.button--subtle {
+    color: var(--basic-success);
+    background-color: white;
+}
+
+.button--success.button--subtle:hover {
+    color: white;
+    background-color: var(--basic-success);
+}
+
+/* Button warning */
+.button--warning {
+    background-color: var(--basic-warning);
+}
+
+.button--warning:hover {
+    background-color: var(--basic-warning-dark);
+}
+
+.button--warning:focus {
+    outline: .15em solid var(--basic-warning-fade);
+}
+
+.button--warning.button--subtle {
+    color: var(--basic-warning);
+    background-color: white;
+}
+
+.button--warning.button--subtle:hover {
+    color: white;
+    background-color: var(--basic-warning);
+}
+
+/* Button error */
+.button--error {
+    background-color: var(--basic-error);
+}
+
+.button--error:hover {
+    background-color: var(--basic-error-dark);
+}
+
+.button--error:focus {
+    outline: .15em solid var(--basic-error-fade);
+}
+
+.button--error.button--subtle {
+    color: var(--basic-error);
+    background-color: white;
+}
+
+.button--error.button--subtle:hover {
+    color: white;
+    background-color: var(--basic-error);
+}

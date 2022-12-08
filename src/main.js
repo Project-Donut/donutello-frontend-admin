@@ -2,8 +2,8 @@ import { createApp } from "vue";
 import PrimeVue from 'primevue/config';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import ColumnGroup from 'primevue/columngroup'; //optional for column grouping
-import Row from 'primevue/row'; //optional for row
+import DropDown from 'primevue/dropdown';
+import MultiSelect from 'primevue/multiselect';
 
 import "primevue/resources/themes/saga-blue/theme.css"; //theme
 import "primevue/resources/primevue.min.css"; //core css
@@ -28,8 +28,8 @@ app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(PrimeVue);
 app.component('DataTable', DataTable);
 app.component('Column', Column);
-app.component('ColumnGroup', ColumnGroup);
-app.component('Row', Row);
+app.component('Dropdown', DropDown);
+app.component('MultiSelect', MultiSelect);
 
 app.use(router);
 

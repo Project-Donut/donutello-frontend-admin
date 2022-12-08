@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600;700&family=Lato:ital@0;1&display=swap');
+@import url('./style_button.css');
+@import url('./style_input.css');
 
 :root {
     --body: rgb(33, 37, 41);
+    --background: rgb(248, 249, 250);
+
     --gray-1: rgb(66, 69, 72);
     --gray-2: rgb(83, 86, 91);
     --gray-3: rgb(107, 109, 114);
@@ -9,7 +13,7 @@
     --gray-5: rgb(151, 152, 157);
     --gray-6: rgb(169, 172, 180);
     --gray-7: rgb(190, 192, 197);
-    --gray-8: rgb(240, 240, 240);
+    --gray-8: rgb(212, 212, 212);
 
     --basic-error: rgb(244, 67, 54);
     --basic-info: rgb(33, 150, 243);
@@ -59,7 +63,7 @@ body {
     font-family: 'Lato', sans-serif;
     font-size: var(--font-size-regular);
     color: var(--body);
-    background-color: var(--gray-8);
+    background-color: var(--background);
     margin: 0px;
 }
 
@@ -70,103 +74,4 @@ h4,
 h5,
 h6 {
     font-family: 'Dosis', sans-serif;
-}
-
-.button {
-    font-family: 'Dosis', sans-serif;
-    font-size: var(--font-size-regular);
-    text-transform: uppercase;
-
-    background-color: var(--primary-strawberry);
-    color: white;
-
-    min-width: 40px;
-    padding: .5em;
-    border: none;
-    border-radius: 8px;
-
-    cursor: pointer;
-    transition: all .2s ease-in-out;
-}
-
-.button:hover {
-    background-color: var(--primary-strawberry-dark);
-}
-
-.button:focus {
-    outline: .15em solid var(--primary-strawberry-fade);
-}
-
-.button--lemon {
-    background-color: var(--primary-lemon);
-    color: var(--body);
-}
-
-.button--lemon:hover {
-    background-color: var(--primary-lemon-dark);
-}
-
-.button--lemon:focus {
-    outline: .15em solid var(--primary-lemon-fade);
-}
-
-.button--heaven {
-    background-color: var(--primary-heaven);
-}
-
-.button--heaven:hover {
-    background-color: var(--primary-heaven-dark);
-}
-
-.button--heaven:focus {
-    outline: .15em solid var(--primary-heaven-fade);
-}
-
-.button--danger {
-    background-color: var(--basic-error);
-}
-
-.button--danger:hover {
-    background-color: var(--basic-error-dark);
-}
-
-.button--danger:focus {
-    outline: .15em solid var(--basic-error-fade);
-}
-
-.button--large {
-    padding: 1em;
-    font-size: var(--font-size-large-1);
-}
-
-.input {
-    /* Style Input */
-    font-family: 'Lato', sans-serif;
-    font-size: var(--font-size-regular);
-    border: 2px solid var(--gray-7);
-    border-radius: 8px;
-    padding: .5em;
-    margin-bottom: .5em;
-}
-
-.input:focus {
-    /* Custom Outline */
-    outline: var(--primary-heaven) solid 2px;
-}
-
-.label {
-    /* Style Label */
-    font-family: 'Dosis', sans-serif;
-    font-size: var(--font-size-regular);
-    margin-bottom: .5em;
-}
-
-.form-group:last-of-type {
-    margin-bottom: .75em;
-}
-
-.error-message {
-    /* Style Error Message */
-    color: var(--basic-error);
-    margin: 0px;
 }
