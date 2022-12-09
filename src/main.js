@@ -10,6 +10,10 @@ import "primevue/resources/primevue.min.css"; //core css
 import "primeicons/primeicons.css"; //icons
 
 import "./style.css";
+import "./style_button.css";
+import "./style_input.css";
+import "./style_prime_override.css";
+
 import App from "./App.vue";
 import router from "./router";
 

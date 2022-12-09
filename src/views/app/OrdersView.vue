@@ -1,18 +1,18 @@
 <template>
     <DataTable :value="orders" :paginator="true" striped-rows :rows="10" dataKey="_id" v-model:filters="filters"
-        filterDisplay="row" responsiveLayout="scroll" :globalFilterFields="['status']">
+        filterDisplay="menu" responsiveLayout="scroll" :globalFilterFields="['status']">
         <template #empty>
             Geen bestellingen gevonden.
         </template>
         <template #loading>
             Bestellingen aan het laden...
         </template>
-        <Column field="status" header="Status" :showFilterMenu="false" style="min-width:12rem">
+        <Column field="status" header="Status" :showFilterMenu="true" :filterMatchModeOptions="[FilterMatchMode.EQUALS]" style="min-width:12rem">
             <template #body="{ data }">
                 <span :class="'status-badge status-badge--' + data.status">{{ data.status }}</span>
             </template>
             <template #filter="{ filterModel, filterCallback }">
-                <Dropdown v-model="filterModel.value" @change="filterCallback()" :options="statusOptions"
+                <Dropdown :ref="statusDropdown" v-model="filterModel.value" @change="e => { filterCallback(); statusFilterCallback(e) }" :options="statusOptions"
                     placeholder="Any" class="p-column-filter" :showClear="true">
                     <template #value="slotProps">
                         <span :class="'status-badge status-badge--' + slotProps.value" v-if="slotProps.value">{{
@@ -56,28 +56,47 @@
 </template>
 <script setup>
 import { reactive, onMounted, ref } from 'vue';
-import { FilterMatchMode, FilterOperator } from 'primevue/api';
-
-import Test from '../../components/Test.vue';
+import { FilterMatchMode } from 'primevue/api';
 
 import { getOrders } from '../../api/order';
 import { formatDate } from '../../js/formatDate';
 
+const orders = reactive([]);
+const query = ref('');
 const filters = ref({
     'status': { value: null, matchMode: FilterMatchMode.EQUALS }
-})
+});
 const statusOptions = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
-const orders = reactive([]);
 
-onMounted(async () => {
-    const result = await getOrders();
+let statusDropdown = ref(null);
+
+const loadOrders = async () => {
+    const result = await getOrders(query.value);
     if (result.status === "success") {
         orders.push(...result.data);
         // sort by priority
         orders.sort((a, b) => (a.priority < b.priority) ? 1 : ((b.priority < a.priority) ? -1 : 0));
     }
-});
+}
 
+let prevStatusFilter = null;
+const statusFilterCallback = e => {
+    if (prevStatusFilter === e.value) {
+        return;
+    }
+    orders.length = 0;
+    console.log(e.value);
+    if (e.value !== null) {
+        query.value = `status=${e.value}`;
+    }
+    else {
+        query.value = '';
+    }
+    loadOrders();
+    prevStatusFilter = e.value;
+}
+
+onMounted(loadOrders);
 </script>
 <style scoped>
 .action-container {
