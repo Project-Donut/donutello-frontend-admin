@@ -1,5 +1,5 @@
 <template>
-    <DataTable :value="orders" :paginator="true" striped-rows :rows="10" dataKey="_id" v-model:filters="filters"
+    <DataTable removableSort :value="orders" :paginator="true" striped-rows :rows="10" dataKey="_id" v-model:filters="filters"
         filterDisplay="menu" responsiveLayout="scroll" :globalFilterFields="['status']">
         <template #empty>
             Geen bestellingen gevonden.
@@ -31,9 +31,9 @@
                 <img :src="slotProps.data.customer.image" alt="Custom donut" />
             </template>
         </Column>
-        <Column header="Naam" field="customer.fullName"></Column>
-        <Column header="Adres" field="address.fullAddress"></Column>
-        <Column header="Leverdatum">
+        <Column header="Naam" field="customer.fullName" :sortable="true"></Column>
+        <Column header="Adres" field="address.fullAddress" :sortable="true"></Column>
+        <Column header="Leverdatum" field="dateBy" :sortable="true">
             <template #body="slotProps">
                 {{ formatDate(slotProps.data.dateBy) }}
             </template>
