@@ -1,14 +1,29 @@
 <template>
-    <DataTable :value="orders" striped-rows filterDisplay="menu" :filters="filters1" dataKey="_id">
+    <DataTable :value="orders" :paginator="true" striped-rows :rows="10" dataKey="_id" v-model:filters="filters"
+        filterDisplay="row" responsiveLayout="scroll" :globalFilterFields="['status']">
         <template #empty>
             Geen bestellingen gevonden.
         </template>
         <template #loading>
             Bestellingen aan het laden...
         </template>
-        <Column field="status" header="Status" >
+        <Column field="status" header="Status" :showFilterMenu="false" style="min-width:12rem">
             <template #body="{ data }">
                 <span :class="'status-badge status-badge--' + data.status">{{ data.status }}</span>
+            </template>
+            <template #filter="{ filterModel, filterCallback }">
+                <Dropdown v-model="filterModel.value" @change="filterCallback()" :options="statusOptions"
+                    placeholder="Any" class="p-column-filter" :showClear="true">
+                    <template #value="slotProps">
+                        <span :class="'status-badge status-badge--' + slotProps.value" v-if="slotProps.value">{{
+                                slotProps.value
+                        }}</span>
+                        <span v-else>{{ slotProps.placeholder }}</span>
+                    </template>
+                    <template #option="slotProps">
+                        <span :class="'status-badge status-badge--' + slotProps.option">{{ slotProps.option }}</span>
+                    </template>
+                </Dropdown>
             </template>
         </Column>
         <Column>
@@ -41,13 +56,15 @@
 </template>
 <script setup>
 import { reactive, onMounted, ref } from 'vue';
-import {FilterMatchMode,FilterOperator} from 'primevue/api';
+import { FilterMatchMode, FilterOperator } from 'primevue/api';
+
+import Test from '../../components/Test.vue';
 
 import { getOrders } from '../../api/order';
 import { formatDate } from '../../js/formatDate';
 
-const filters1 = ref({
-    'status': {operator: FilterOperator.OR, constraints: [{value: null, matchMode: FilterMatchMode.EQUALS}]},
+const filters = ref({
+    'status': { value: null, matchMode: FilterMatchMode.EQUALS }
 })
 const statusOptions = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
 const orders = reactive([]);
