@@ -1,0 +1,27 @@
+.input {
+    font-family: 'Lato', sans-serif;
+    font-size: var(--font-size-regular);
+    border: 2px solid var(--gray-7);
+    border-radius: 8px;
+    padding: .5em;
+    margin-bottom: .5em;
+}
+
+.input:focus {
+    outline: var(--primary-heaven) solid 2px;
+}
+
+.label {
+    font-family: 'Dosis', sans-serif;
+    font-size: var(--font-size-regular);
+    margin-bottom: .5em;
+}
+
+.form-group:last-of-type {
+    margin-bottom: .75em;
+}
+
+.error-message {
+    color: var(--basic-error);
+    margin: 0px;
+}
