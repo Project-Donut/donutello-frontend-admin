@@ -32,7 +32,7 @@ export const createURLQueryFromPrimeVue = (params) => {
             console.groupEnd();
 
             if (filter.value !== null)
-                filterList.push(`{'${field}': '${filter.value}'}`);
+                filterList.push(`{"${field}":"${filter.value}"}`);
         }
 
         if (filterList.length > 0) {
