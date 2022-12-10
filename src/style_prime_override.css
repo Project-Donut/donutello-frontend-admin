@@ -1,0 +1,4 @@
+.p-column-filter-overlay .p-column-filter-matchmode-dropdown,
+.p-column-filter-overlay .p-column-filter-buttonbar {
+    display: none!important;
+}
