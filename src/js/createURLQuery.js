@@ -5,13 +5,16 @@ export const createURLQueryFromPrimeVue = (params) => {
     let query = [];
 
     // Format paging
-    if (params.first === Number) query.push(`first=${params.first}`);
-    if (params.rows === Number) query.push(`rows=${params.rows}`);
-
+    if (!isNaN(params.first)) {
+        query.push(`skip=${params.first}`);
+    }
+    if (!isNaN(params.rows)) {
+        query.push(`limit=${params.rows}`);
+    }
     // Format sorting
     if (params.sortField) {
         query.push(`sort=${params.sortField}`);
-        query.push(`order=${typeof params.sortOrder === Number ? params.sortOrder : 1}`);
+        query.push(`order=${ !isNaN(params.sortOrder) ? params.sortOrder : 1}`);
     }
 
     // Format filters

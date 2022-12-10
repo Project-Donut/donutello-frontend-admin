@@ -1,7 +1,6 @@
 <template>
-    <DataTable  :value="orders" :lazy="true" v-model:filters="filters" ref="dt" dataKey="_id" 
-        :totalRecords="totalRecords" :loading="loading" @page="onPage($event)" @sort="onSort($event)" @filter="onFilter($event)" filterDisplay="menu" 
-        :virtualScrollerOptions="{ lazy: true, onLazyLoad: loadData, itemSize: 5, delay: 200, showLoader: true, loading: lazyLoading, numToleratedItems: 10 }"
+    <DataTable  :value="orders" :lazy="true" v-model:filters="filters" ref="dt" dataKey="_id"  :paginator="true" :rows="10"
+        :loading="loading" @page="onPage($event)" @sort="onSort($event)" @filter="onFilter($event)" filterDisplay="menu" 
         :globalFilterFields="['status']" responsiveLayout="scroll" removableSort striped-rows >
         <template #empty>
             Geen bestellingen gevonden.
@@ -131,7 +130,7 @@ onMounted(() => {
     lazyParams.value = {
         first: 0,
         rows: dt.value.rows,
-        sortField: 'Priority',
+        sortField: 'priority',
         sortOrder: 1,
         filters: filters.value
     };
