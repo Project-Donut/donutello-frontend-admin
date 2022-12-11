@@ -47,7 +47,7 @@
             </template>
         </Column>
         <template #footer>
-            <div style="margin: 0 auto; width: fit-content;">found {{totalRecords}} records</div>
+            <div style="margin: 0 auto; width: fit-content;">Found {{totalRecords}} records</div>
         </template>
         </DataTable>
 </template>
