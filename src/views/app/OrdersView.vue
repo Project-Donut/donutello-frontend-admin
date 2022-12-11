@@ -1,6 +1,6 @@
 <template>
     <DataTable  :value="orders" :lazy="true" v-model:filters="filters" ref="dt" dataKey="_id"  :paginator="true" :rows="10"
-        :loading="loading" @page="onPage($event)" @sort="onSort($event)" @filter="onFilter($event)" filterDisplay="menu" 
+        :loading="loading" @page="onPage($event)" @sort="onSort($event)" @filter="onFilter($event)" filterDisplay="menu" @row-click="rowClick($event)"
         :globalFilterFields="['status']" :totalRecords="totalRecords" responsiveLayout="scroll" removableSort striped-rows rowHover >
         <template #empty>
             Geen bestellingen gevonden.
@@ -50,11 +50,13 @@
             <div style="margin: 0 auto; width: fit-content;">Found {{totalRecords}} records</div>
         </template>
         </DataTable>
+        <OrderDialog :open="open" :order="selectedOrder"></OrderDialog>
 </template>
 
 <script setup>
-import { reactive, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { FilterMatchMode } from 'primevue/api';
+import OrderDialog from '../../components/OrderDialog.vue';
 
 import { getOrders } from '../../api/order';
 import { formatDate } from '../../js/formatDate';
@@ -70,11 +72,15 @@ const filters = ref({
 });
 const lazyParams = ref({});
 const statusOptions = ['100 - pending', '200 - processing', '300 - shipped', '400 - delivered', '000 - cancelled'];
+const selectedOrder = ref(null);
+const open = ref(false);
 
-/**
- * 
- * @param {String} status 
- */
+const rowClick = (e) => {
+    console.log(e);
+    open.value = true;
+    selectedOrder.value = e.data;
+}
+
 const trimStatus = (status) => {
     return status.slice(6);
 }
