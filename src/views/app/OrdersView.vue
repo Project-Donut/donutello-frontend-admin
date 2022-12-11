@@ -50,7 +50,7 @@
             <div style="margin: 0 auto; width: fit-content;">Found {{totalRecords}} records</div>
         </template>
         </DataTable>
-        <OrderDialog :open="open" :order="selectedOrder"></OrderDialog>
+        <OrderDialog :open="open" :order="selectedOrder" @close="onClose"/>
 </template>
 
 <script setup>
@@ -76,9 +76,13 @@ const selectedOrder = ref(null);
 const open = ref(false);
 
 const rowClick = (e) => {
-    console.log(e);
     open.value = true;
     selectedOrder.value = e.data;
+}
+
+const onClose = (e) => {
+    open.value = false;
+    selectedOrder.value = null;
 }
 
 const trimStatus = (status) => {
