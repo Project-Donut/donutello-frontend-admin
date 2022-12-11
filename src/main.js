@@ -1,10 +1,13 @@
 import { createApp } from "vue";
+import DonuttelloLogo from "./components/svg/DonuttelloLogo.vue";
 import PrimeVue from 'primevue/config';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import DropDown from 'primevue/dropdown';
 import MultiSelect from 'primevue/multiselect';
 import Dialog from 'primevue/dialog';
+import Avatar from 'primevue/avatar';
+import Menu from 'primevue/menu';
 
 import "primevue/resources/themes/saga-blue/theme.css"; //theme
 import "primevue/resources/primevue.min.css"; //core css
@@ -36,6 +39,9 @@ app.component('Column', Column);
 app.component('Dropdown', DropDown);
 app.component('MultiSelect', MultiSelect);
 app.component('Dialog', Dialog);
+app.component('Avatar', Avatar);
+app.component('DonuttelloLogo', DonuttelloLogo);
+app.component('Menu', Menu);
 
 app.use(router);
 
