@@ -1,7 +1,7 @@
 export const createURLQueryFromPrimeVue = (params) => {
     if (!params || params === {})
         return "";
-    console.log(JSON.parse(JSON.stringify(params)));
+    // console.log(JSON.parse(JSON.stringify(params)));
     let query = [];
 
     // Format paging
@@ -28,11 +28,11 @@ export const createURLQueryFromPrimeVue = (params) => {
             let field = filterColumns[column];
             let filter = params.filters[field];
 
-            console.groupCollapsed("filters");
-            console.log("column", column);
-            console.log("filterColumns", field);
-            console.log("params.filters", filter);
-            console.groupEnd();
+            // console.groupCollapsed("filters");
+            // console.log("column", column);
+            // console.log("filterColumns", field);
+            // console.log("params.filters", filter);
+            // console.groupEnd();
 
             if (filter.value !== null)
                 filterList.push(`{"${field}":"${filter.value}"}`);

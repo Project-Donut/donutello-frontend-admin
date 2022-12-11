@@ -1,7 +1,7 @@
 <template>
     <DataTable  :value="orders" :lazy="true" v-model:filters="filters" ref="dt" dataKey="_id"  :paginator="true" :rows="10"
         :loading="loading" @page="onPage($event)" @sort="onSort($event)" @filter="onFilter($event)" filterDisplay="menu" 
-        :globalFilterFields="['status']" responsiveLayout="scroll" removableSort striped-rows >
+        :globalFilterFields="['status']" :totalRecords="totalRecords" responsiveLayout="scroll" removableSort striped-rows >
         <template #empty>
             Geen bestellingen gevonden.
         </template>
@@ -9,52 +9,57 @@
             Bestellingen aan het laden...
         </template>
         <Column field="status" header="Status" :showFilterMenu="true" :filterMatchModeOptions="[FilterMatchMode.EQUALS]"
-            style="min-width:12rem">
+            headerStyle="width: 150px">
             <template #body="{ data }">
-                <span :class="'status-badge status-badge--' + data.status">{{ data.status }}</span>
+                <span :class="'status-badge status-badge--' + trimStatus(data.status)">{{ trimStatus(data.status) }}</span>
             </template>
             <template #filter="{ filterModel, filterCallback }">
                 <Dropdown v-model="filterModel.value" @change="filterCallback"
                     :options="statusOptions" placeholder="Any" class="p-column-filter" :showClear="true">
                     <template #value="slotProps">
-                        <span :class="'status-badge status-badge--' + slotProps.value" v-if="slotProps.value">{{
+                        <span :class="'status-badge status-badge--' + trimStatus(slotProps.value)" v-if="slotProps.value">{{
                                 slotProps.value
                         }}</span>
                         <span v-else>{{ slotProps.placeholder }}</span>
                     </template>
                     <template #option="slotProps">
-                        <span :class="'status-badge status-badge--' + slotProps.option">{{ slotProps.option }}</span>
+                        <span :class="'status-badge status-badge--' + trimStatus(slotProps.option)">{{ trimStatus(slotProps.option) }}</span>
                     </template>
                 </Dropdown>
             </template>
         </Column>
-        <Column>
+        <Column headerStyle="width: 100px">
             <template #body="slotProps">
-                <img :src="slotProps.data.customer.image" alt="Custom donut" />
+                <img :src="slotProps.data.image" alt="Custom donut" width="100" />
             </template>
         </Column>
         <Column header="Naam" field="customer.fullName" :sortable="true"></Column>
-        <Column header="Adres" field="address.fullAddress" :sortable="true"></Column>
+        <Column header="Adres" field="address" :sortable="true"></Column>
         <Column header="Leverdatum" field="dateBy" :sortable="true">
             <template #body="slotProps">
                 {{ formatDate(slotProps.data.dateBy) }}
             </template>
         </Column>
-        <Column header="Acties" frozen alignFrozen="right">
+        <Column header="Acties" frozen alignFrozen="right" style="width: 88px">
             <template #body="slotProps">
                 <div class="action-container">
-                    <button v-if="slotProps.data.status === 'pending'" class="button button--subtle button--info"
+                    <button v-if="trimStatus(slotProps.data.status) === 'pending'" class="button button--subtle button--info"
                         title="Start"><i class="pi pi-play"></i></button>
-                    <button v-if="slotProps.data.status === 'processing'" class="button button--subtle button--warning"
+                    <button v-if="trimStatus(slotProps.data.status) === 'processing'" class="button button--subtle button--warning"
                         title="Verzenden"><i class="pi pi-send"></i></button>
-                    <button v-if="slotProps.data.status === 'shipped'" class="button button--subtle button--succeed"><i
+                    <button v-if="trimStatus(slotProps.data.status) === 'shipped'" class="button button--subtle button--succeed"><i
                             class="pi pi-check" title="Afronden"></i></button>
                     <button class="button button--subtle button--error" title="Annulleren"><i
                             class="pi pi-trash"></i></button>
                 </div>
             </template>
         </Column>
-    </DataTable>
+        <template #footer>
+            <div style="margin: 0 auto; width: fit-content;">
+            found {{totalRecords}} records
+            </div>
+        </template>
+        </DataTable>
 </template>
 
 <script setup>
@@ -74,22 +79,23 @@ const filters = ref({
     'status': { value: null, matchMode: FilterMatchMode.EQUALS }
 });
 const lazyParams = ref({});
-const statusOptions = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
-// const columns = ref([
-//     {field: 'status', header: "Status"},
-//     {field: 'image', header: ""},
-//     {field: 'name', header: "Naam"},
-//     {field: 'Address', header: "Adres"},
-//     {field: 'byDate', header: "Leverdatum"},
-//     {header: "Acties"},
-// ]);
+const statusOptions = ['100 - pending', '200 - processing', '300 - shipped', '400 - delivered', '000 - cancelled'];
+
+/**
+ * 
+ * @param {String} status 
+ */
+const trimStatus = (status) => {
+    return status.slice(6);
+}
+
 const loadData = () => {
     loading.value = true;
     const urlQuery = createURLQueryFromPrimeVue(lazyParams.value);
     getOrders(urlQuery)
         .then(response => {
-            orders.value = response.data;
-            totalRecords.value = response.totalRecords;
+            orders.value = response.data.orders;
+            totalRecords.value = response.data.totalRecords;
             loading.value = false;
         });
 }
@@ -130,51 +136,13 @@ onMounted(() => {
     lazyParams.value = {
         first: 0,
         rows: dt.value.rows,
-        sortField: 'priority',
-        sortOrder: 1,
+        sortField: null,
+        sortOrder: null,
         filters: filters.value
     };
 
     loadData();
 });
-// Original Component
-/*
-const orders = reactive([]);
-const query = ref('');
-const filters = ref({
-    'status': { value: null, matchMode: FilterMatchMode.EQUALS }
-});
-const statusOptions = ['pending', 'processing', 'shipped', 'delivered', 'cancelled'];
-
-const loadOrders = async (callback) => {
-    const result = await getOrders(query.value);
-    if (result.status === "success") {
-        orders.push(...result.data);
-        // sort by priority
-        orders.sort((a, b) => (a.priority < b.priority) ? 1 : ((b.priority < a.priority) ? -1 : 0));
-    }
-    callback(result);
-}
-
-let prevStatusFilter = null;
-const statusFilterCallback = e => {
-    if (prevStatusFilter === e.value) {
-        return;
-    }
-    orders.length = 0;
-    console.log(e.value);
-    if (e.value !== null) {
-        query.value = `status=${e.value}`;
-    }
-    else {
-        query.value = '';
-    }
-    loadOrders();
-    prevStatusFilter = e.value;
-}
-
-onMounted(loadOrders);
-*/
 </script>
 <style scoped>
 .action-container {
