@@ -6,6 +6,7 @@ import Column from 'primevue/column';
 import DropDown from 'primevue/dropdown';
 import MultiSelect from 'primevue/multiselect';
 import Avatar from 'primevue/avatar';
+import Menu from 'primevue/menu';
 
 import "primevue/resources/themes/saga-blue/theme.css"; //theme
 import "primevue/resources/primevue.min.css"; //core css
@@ -38,6 +39,7 @@ app.component('Dropdown', DropDown);
 app.component('MultiSelect', MultiSelect);
 app.component('Avatar', Avatar);
 app.component('DonuttelloLogo', DonuttelloLogo);
+app.component('Menu', Menu);
 
 app.use(router);
 
