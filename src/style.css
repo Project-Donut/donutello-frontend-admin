@@ -64,6 +64,8 @@ body {
     font-size: var(--font-size-regular);
     color: var(--body);
     background-color: var(--background);
+    background-image: url(/background.svg);
+    background-size: cover;
     margin: 0px;
 }
 

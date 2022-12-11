@@ -134,3 +134,9 @@
     color: white;
     background-color: var(--basic-error);
 }
+
+.button:disabled {
+    color: white;
+    background-color: var(--gray-8);
+    cursor: initial;
+}
