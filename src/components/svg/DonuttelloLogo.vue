@@ -2,7 +2,7 @@
     <!-- Generator: Adobe Illustrator 27.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
     <svg v-if="!props.alt" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 842 538"
-        style="enable-background:new 0 0 842 538;" xml:space="preserve">
+        style="enable-background:new 0 0 842 538;" xml:space="preserve" :height="props.height">
         <g transform="translate(0.000000,538.000000) scale(0.100000,-0.100000)">
             <path class="st0" d="M3979,5169c-221-32-450-184-591-392c-148-217-211-524-159-772c26-127,105-289,191-392c133-160,319-278,479-304
 		c86-14,124-3,177,50c104,105,298,434,311,528c5,37,3,41-30,62c-121,75-227,267-227,411c0,84,31,137,100,173c50,26,62,28,135,24
@@ -53,7 +53,7 @@
         </g>
     </svg>
     <svg v-if="props.alt" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        x="0px" y="0px" viewBox="0 0 182 132" style="enable-background:new 0 0 182 132;" xml:space="preserve">
+        x="0px" y="0px" viewBox="0 0 182 132" :height="props.height" style="enable-background:new 0 0 182 132;" xml:space="preserve">
         <g transform="translate(0.000000,132.000000) scale(0.100000,-0.100000)">
             <path class="st0" d="M1760,750c0-106-18-181-69-285c-116-234-323-376-607-415c-136-19-407-9-508,19c-230,61-395,199-455,379
 		c-28,81-28,207-2,284c51,148,183,279,380,378c104,52,290,115,396,134c109,20,336,20,433,1c43-9,114-34,162-57
@@ -129,6 +129,10 @@ const props = defineProps({
     alt: {
         type: Boolean,
         default: false,
+    },
+    height: {
+        type: String,
+        default: '100%',
     }
 });
 if (typeof props.alt !== 'boolean') {
