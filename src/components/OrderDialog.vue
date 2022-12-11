@@ -6,7 +6,7 @@
 import { defineProps } from 'vue';
 let props = defineProps({
     order: Object,
-    open: Booleans
+    open: Boolean
 });
 </script>
 
