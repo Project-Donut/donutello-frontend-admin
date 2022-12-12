@@ -162,7 +162,7 @@ onMounted(() => {
 }
 
 .status-badge--pending {
-    background-color: var(--gray-8);
+    background-color: var(--gray-light-2);
 }
 
 .status-badge--processing {

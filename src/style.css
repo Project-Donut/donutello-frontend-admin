@@ -3,17 +3,26 @@
 @import url('./style_input.css');
 
 :root {
-    --body: rgb(33, 37, 41);
-    --background: rgb(248, 249, 250);
+    --body: hsl(210, 10%, 15%);
+    --background: hsl(210, 17%, 98%);
 
-    --gray-1: rgb(66, 69, 72);
-    --gray-2: rgb(83, 86, 91);
-    --gray-3: rgb(107, 109, 114);
-    --gray-4: rgb(128, 130, 134);
-    --gray-5: rgb(151, 152, 157);
-    --gray-6: rgb(169, 172, 180);
-    --gray-7: rgb(190, 192, 197);
-    --gray-8: rgb(212, 212, 212);
+    --gray-light-1: hsl(210, 10%, 95%);
+    --gray-light-2: hsl(210, 10%, 89%);
+    --gray-light-3: hsl(210, 10%, 82%);
+    --gray-light-4: hsl(210, 10%, 77%);
+    --gray-light-5: hsl(210, 10%, 73%);
+
+    --gray-medium-1: hsl(210, 7%, 59%);
+    --gray-medium-2: hsl(210, 7%, 56%);
+    --gray-medium-3: hsl(210, 7%, 53%);
+    --gray-medium-4: hsl(210, 7%, 49%);
+    --gray-medium-5: hsl(210, 7%, 46%);
+
+    --gray-dark-1: hsl(210, 5%, 40%);
+    --gray-dark-2: hsl(210, 5%, 36%);
+    --gray-dark-3: hsl(210, 5%, 31%);
+    --gray-dark-4: hsl(210, 5%, 27%);
+    --gray-dark-5: hsl(210, 5%, 24%);
 
     --basic-error: rgb(244, 67, 54);
     --basic-info: rgb(33, 150, 243);

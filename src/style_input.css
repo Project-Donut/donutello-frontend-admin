@@ -1,14 +1,15 @@
 .input {
     font-family: 'Lato', sans-serif;
     font-size: var(--font-size-regular);
-    border: 2px solid var(--gray-7);
+    border: 2px solid var(--gray-light-2);
+    background-color: white;
     border-radius: 8px;
     padding: .5em;
     margin-bottom: .5em;
 }
 
 .input:focus {
-    outline: var(--primary-heaven) solid 2px;
+    outline: var(--primary-heaven-fade) solid 2px;
 }
 
 .label {
