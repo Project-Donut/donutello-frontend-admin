@@ -4,7 +4,7 @@
             <DonuttelloLogo alt />
         </div>
         <template v-if="!state.loading">
-            <Avatar size="medium" style="cursor: pointer;" :label="state.user.username" shape="circle" @click="clickAvatar">{{state?.user?.username?.toUpperCase().charAt(0)}}</Avatar>
+            <Avatar size="large" style="cursor: pointer;" :label="state.user.username" shape="circle" @click="clickAvatar">{{state?.user?.username?.toUpperCase().charAt(0)}}</Avatar>
             <Menu ref="menu" :model="items" :popup="true" />
         </template>
     </nav>
@@ -51,7 +51,8 @@ onMounted(async () => {
     justify-content: space-between;
     align-items: center;
     vertical-align: center;
-    background-color: var(--color-primary);
+    background-color: white;
+    border-bottom: 1px solid var(--gray-light-1);
     color: var(--color-white);
     padding: .25em .75em .25em .5em;
 }

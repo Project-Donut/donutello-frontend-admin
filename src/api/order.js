@@ -10,3 +10,16 @@ export const getOrders = async (query = null) => {
     });
     return response.json();
 }
+
+export const putOrder = async (update) => {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${API_URI}/order/${update._id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+        },
+        body: JSON.stringify(update),
+    });
+    return response.json();
+}

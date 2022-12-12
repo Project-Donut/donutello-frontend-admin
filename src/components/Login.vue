@@ -75,7 +75,7 @@ const login = () => {
     width: 230px;
 }
 
-button {
-    margin-bottom: 1em;
+.form-group {
+    width: 100%;
 }
 </style>

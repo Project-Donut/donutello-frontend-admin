@@ -5,8 +5,14 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import DropDown from 'primevue/dropdown';
 import MultiSelect from 'primevue/multiselect';
+import Dialog from 'primevue/dialog';
 import Avatar from 'primevue/avatar';
 import Menu from 'primevue/menu';
+import Card from 'primevue/card';
+import Inplace from 'primevue/inplace';
+import TextInput from 'primevue/inputtext';
+import NumberInput from 'primevue/inputnumber';
+import Calendar from 'primevue/calendar';
 
 import "primevue/resources/themes/saga-blue/theme.css"; //theme
 import "primevue/resources/primevue.min.css"; //core css
@@ -37,9 +43,15 @@ app.component('DataTable', DataTable);
 app.component('Column', Column);
 app.component('Dropdown', DropDown);
 app.component('MultiSelect', MultiSelect);
+app.component('Dialog', Dialog);
 app.component('Avatar', Avatar);
 app.component('DonuttelloLogo', DonuttelloLogo);
 app.component('Menu', Menu);
+app.component('Card', Card);
+app.component('Inplace', Inplace);
+app.component('TextInput', TextInput);
+app.component('NumberInput', NumberInput);
+app.component('Calendar', Calendar);
 
 app.use(router);
 

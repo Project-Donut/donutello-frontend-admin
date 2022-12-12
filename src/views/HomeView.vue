@@ -8,8 +8,12 @@ import DonuttelloLogo from '../components/svg/DonuttelloLogo.vue';
         <div class="home-view__logo">
             <DonuttelloLogo />
         </div>
-        <h1>Custom Bestellingen</h1>
-        <Login />
+        <Card style="width: 16em; margin-bottom: 2em">
+            <template #title><div>Admin Paneel</div></template>
+            <template #content>
+                <Login />
+            </template>
+        </Card>
     </div>
 </template>
 
@@ -25,5 +29,9 @@ h1 {
     width: 100%;
     max-width: 400px;
     margin-bottom: 2rem;
+}
+div {
+    width: fit-content;
+    margin: 0px auto;
 }
 </style>

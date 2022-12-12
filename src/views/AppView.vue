@@ -18,7 +18,7 @@ import NavBar from '../components/NavBar.vue';
     height: 100vh;
     max-height: 100vh;
     width: 100vw;
-    grid-template-rows: 3em calc(100vh - 3em);
+    grid-template-rows: 4em calc(100vh - 4em);
 }
 
 

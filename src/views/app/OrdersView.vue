@@ -1,6 +1,6 @@
 <template>
     <DataTable  :value="orders" :lazy="true" v-model:filters="filters" ref="dt" dataKey="_id"  :paginator="true" :rows="10"
-        :loading="loading" @page="onPage($event)" @sort="onSort($event)" @filter="onFilter($event)" filterDisplay="menu" 
+        :loading="loading" @page="onPage($event)" @sort="onSort($event)" @filter="onFilter($event)" filterDisplay="menu" @row-click="rowClick($event)"
         :globalFilterFields="['status']" :totalRecords="totalRecords" responsiveLayout="scroll" removableSort striped-rows rowHover >
         <template #empty>
             Geen bestellingen gevonden.
@@ -50,14 +50,17 @@
             <div style="margin: 0 auto; width: fit-content;">Found {{totalRecords}} records</div>
         </template>
         </DataTable>
+        <OrderDialog :open="open" :order="selectedOrder" @close="onClose" @update="onRowUpdate" />
 </template>
 
 <script setup>
-import { reactive, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { FilterMatchMode } from 'primevue/api';
+import OrderDialog from '../../components/OrderDialog.vue';
 
 import { getOrders } from '../../api/order';
 import { formatDate } from '../../js/formatDate';
+import { trimStatus, statusOptions } from '../../js/trimStatus';
 import { createURLQueryFromPrimeVue } from '../../js/createURLQuery';
 
 // From primevue documentation
@@ -69,14 +72,23 @@ const filters = ref({
     'status': { value: null, matchMode: FilterMatchMode.EQUALS }
 });
 const lazyParams = ref({});
-const statusOptions = ['100 - pending', '200 - processing', '300 - shipped', '400 - delivered', '000 - cancelled'];
+const selectedOrder = ref(null);
+const open = ref(false);
 
-/**
- * 
- * @param {String} status 
- */
-const trimStatus = (status) => {
-    return status.slice(6);
+const rowClick = (e) => {
+    open.value = true;
+    selectedOrder.value = e.data;
+}
+
+const onClose = (e) => {
+    open.value = false;
+    selectedOrder.value = null;
+}
+
+const onRowUpdate = (e) => {
+    const index = orders.value.findIndex(order => order._id === e._id);
+    orders.value[index] = e;
+    console.log(orders.value[index]);
 }
 
 const loadData = () => {
@@ -142,36 +154,5 @@ onMounted(() => {
 
 .action-container button:not(:last-of-type) {
     margin-right: 0.5rem;
-}
-
-.status-badge {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    text-transform: capitalize;
-}
-
-.status-badge--pending {
-    background-color: var(--gray-8);
-}
-
-.status-badge--processing {
-    background-color: var(--basic-info);
-    color: white;
-}
-
-.status-badge--shipped {
-    background-color: var(--basic-warning);
-    color: white;
-}
-
-.status-badge--delivered {
-    background-color: var(--basic-success);
-    color: white;
-}
-
-.status-badge--cancelled {
-    background-color: var(--basic-error);
-    color: white;
 }
 </style>
