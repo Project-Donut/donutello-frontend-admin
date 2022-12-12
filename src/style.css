@@ -86,3 +86,34 @@ h5,
 h6 {
     font-family: 'Dosis', sans-serif;
 }
+
+.status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.status-badge--pending {
+    background-color: var(--gray-light-2);
+}
+
+.status-badge--processing {
+    background-color: var(--basic-info);
+    color: white;
+}
+
+.status-badge--shipped {
+    background-color: var(--basic-warning);
+    color: white;
+}
+
+.status-badge--delivered {
+    background-color: var(--basic-success);
+    color: white;
+}
+
+.status-badge--cancelled {
+    background-color: var(--basic-error);
+    color: white;
+}
