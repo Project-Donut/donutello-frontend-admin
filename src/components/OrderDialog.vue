@@ -1,10 +1,10 @@
 <template>
-    <Dialog :header="header" v-model:visible="state.open" :maximizable="true" :modal="true"
+    <Dialog class=".order-dialog" :header="header" v-model:visible="state.open" :maximizable="true" :modal="true"
         :breakpoints="{ '960px': '75vw', '640px': '90vw' }" :style="{ width: '50vw' }" @hide="$emit('close')">
-        <span>
+        <div class="order__status__wrapper">
             <label>Status</label>
             <Dropdown v-model="state.edit.status" @change="filterCallback" :options="statusOptions" placeholder="Any"
-                class="p-column-filter" :showClear="true">
+                class="p-column-filter">
                 <template #value="slotProps">
                     <div style="margin: .5em 0em">
                         <span :class="'status-badge status-badge--' + trimStatus(slotProps.value)">
@@ -19,7 +19,7 @@
                     </div>
                 </template>
             </Dropdown>
-        </span>
+        </div>
         <h2>Bestelling</h2>
         <div class="order__content">
             <span>
@@ -49,7 +49,7 @@
         <div class="order__content">
             <span>
                 <label>Bedrijf</label>
-                <Inplace :closable="true">
+                <Inplace :active="state.toggle2" @open="onToggle2">
                     <template #display>
                         {{ state.order.customer.company }}
                     </template>
@@ -60,7 +60,7 @@
             </span>
             <span>
                 <label>Naam</label>
-                <Inplace :closable="true">
+                <Inplace :active="state.toggle2">
                     <template #display>
                         {{ state.order.customer.fullName }}
                     </template>
@@ -71,7 +71,7 @@
             </span>
             <span>
                 <label>Telefoonnummer</label>
-                <Inplace :closable="true">
+                <Inplace :active="state.toggle2">
                     <template #display>
                         {{ state.order.customer.phone }}
                     </template>
@@ -82,7 +82,7 @@
             </span>
             <span>
                 <label>Email</label>
-                <Inplace :closable="true">
+                <Inplace :active="state.toggle2">
                     <template #display>
                         {{ state.order.customer.email }}
                     </template>
@@ -93,7 +93,7 @@
             </span>
             <span>
                 <label>Lever Adres</label>
-                <Inplace :closable="true">
+                <Inplace :active="state.toggle2">
                     <template #display>
                         {{ state.order.address }}
                     </template>
@@ -104,7 +104,7 @@
             </span>
             <span>
                 <label>Factuuradres</label>
-                <Inplace :closable="true">
+                <Inplace :active="state.toggle2">
                     <template #display>
                         {{ state.order.customer.billingAddress }}
                     </template>
@@ -132,12 +132,10 @@ const state = reactive({
     open: props.open,
     order: props.order,
     edit: props.order,
+    toggle1: false,
+    toggle2: false,
 });
 const emits = defineEmits(['close']);
-const header = computed(() => {
-    const customer = state?.order?.customer?.company || state?.order?.customer?.fullName || "";
-    return `Bestelling ${customer}`;
-})
 
 watch(() => props.open, (current) => state.open = current);
 watch(() => props.order, (current) => {
@@ -145,14 +143,24 @@ watch(() => props.order, (current) => {
     state.edit = Object.assign({}, current);
 });
 
+const header = computed(() => {
+    const customer = state?.order?.customer?.company || state?.order?.customer?.fullName || "";
+    return `Bestelling ${customer}`;
+})
+
+const onToggle2 = e => {
+    console.log(e);
+}
+
 onMounted(() => {
     state.edit = Object.assign({}, state.order);
 });
 </script>
 
 <style scoped>
-.p-inplace {
-    margin: .5em 0;
+.order__status__wrapper {
+    display: flex;
+    flex-direction: column;
 }
 
 .order__content {
@@ -167,5 +175,14 @@ label {
 h2 {
     margin: 0;
     margin-bottom: .25em;
+}
+</style>
+<style>
+.order-dialog .p-inplace {
+    margin: .5em 0;
+}
+
+.order-dialog .p-inplace-display {
+    width: 100%;
 }
 </style>
