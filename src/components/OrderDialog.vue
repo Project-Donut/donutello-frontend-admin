@@ -98,10 +98,26 @@
                 <label>Status</label>
                 <Inplace :closable="true">
                     <template #display>
-                        {{ state.order.status }}
+                        <span :class="'status-badge status-badge--' + trimStatus(state.order.status)"
+                            >{{trimStatus(state.order.status)}}</span>
                     </template>
                     <template #content>
-                        <TextInput v-model="state.order.status" />
+                        <Dropdown v-model="state.edit.status" @change="filterCallback" :options="statusOptions"
+                            placeholder="Any" class="p-column-filter" :showClear="true">
+                            <template #value="slotProps">
+                                <div style="margin: .5em 0em">
+                                    <span :class="'status-badge status-badge--' + trimStatus(slotProps.value)">
+                                        {{ trimStatus(slotProps.value) }}</span>
+                                </div>
+                            </template>
+                            <template #option="slotProps">
+                                <div style="margin: .5em 0em">
+                                    <span :class="'status-badge status-badge--' + trimStatus(slotProps.option)">{{
+                                            trimStatus(slotProps.option)
+                                    }}</span>
+                                </div>
+                            </template>
+                        </Dropdown>
                     </template>
                 </Inplace>
             </span>
@@ -115,6 +131,7 @@
 <script setup>
 import { computed, defineProps, defineEmits, reactive, watch, onMounted } from 'vue';
 import { formatDate } from '../js/formatDate';
+import { trimStatus, statusOptions } from '../js/trimStatus';
 const props = defineProps({
     order: Object,
     open: Boolean
@@ -131,7 +148,10 @@ const header = computed(() => {
 })
 
 watch(() => props.open, (current) => state.open = current);
-watch(() => props.order, (current) => state.order = state.edit = current);
+watch(() => props.order, (current) => {
+    state.order = current;
+    state.edit = Object.assign({}, current);
+});
 
 onMounted(() => {
     state.edit = Object.assign({}, state.order);
