@@ -12,7 +12,8 @@ export const formatDate = (date) => {
     const day = zeroPad(date.getDate(), 2);
     const localDate = `${day}/${month}/${year}`;
     const minutes = zeroPad(Math.floor(date.getMinutes() / 5) * 5, 2);
-    const localTime = `${date.getHours()}:${minutes}`;
+    const hours = zeroPad(date.getHours(), 2);
+    const localTime = `${hours}:${minutes}`;
     return `${localDate} ${localTime}`;
 }
 
