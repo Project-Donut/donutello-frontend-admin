@@ -1,6 +1,6 @@
 <template>
     <Dialog class=".order-dialog" :header="header" v-model:visible="state.open" :maximizable="true" :modal="true"
-        :breakpoints="{ '960px': '75vw', '640px': '90vw' }" :style="{ width: '50vw' }" @hide="$emit('close')">
+        :breakpoints="{ '960px': '75vw', '640px': '90vw' }" :style="{ width: '50vw' }" @hide="emit('close')">
         <div class="order__status__wrapper">
             <label>Status</label>
             <Dropdown v-model="state.edit.status" :options="statusOptions" placeholder="Any"
@@ -130,7 +130,7 @@ const state = reactive({
     edit: props.order,
     editMode: false
 });
-const emits = defineEmits(['close', 'update']);
+const emit = defineEmits(['close', 'update']);
 
 watch(() => props.open, (current) => state.open = current);
 watch(() => props.order, (current) => {
@@ -165,7 +165,7 @@ const saveChanges = () => {
     const result = putOrder(state.edit);
     if (result) {
         state.order = Object.assign({}, state.edit);
-        $emit('update', state.order);
+        emit('update', state.order);
         state.editMode = false;
     }
 }

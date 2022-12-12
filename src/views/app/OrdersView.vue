@@ -50,7 +50,7 @@
             <div style="margin: 0 auto; width: fit-content;">Found {{totalRecords}} records</div>
         </template>
         </DataTable>
-        <OrderDialog :open="open" :order="selectedOrder" @close="onClose"/>
+        <OrderDialog :open="open" :order="selectedOrder" @close="onClose" @update="onRowUpdate" />
 </template>
 
 <script setup>
@@ -83,6 +83,12 @@ const rowClick = (e) => {
 const onClose = (e) => {
     open.value = false;
     selectedOrder.value = null;
+}
+
+const onRowUpdate = (e) => {
+    const index = orders.value.findIndex(order => order._id === e._id);
+    orders.value[index] = e;
+    console.log(orders.value[index]);
 }
 
 const loadData = () => {
