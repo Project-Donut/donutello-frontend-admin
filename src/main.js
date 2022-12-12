@@ -8,6 +8,7 @@ import MultiSelect from 'primevue/multiselect';
 import Dialog from 'primevue/dialog';
 import Avatar from 'primevue/avatar';
 import Menu from 'primevue/menu';
+import Card from 'primevue/card';
 
 import "primevue/resources/themes/saga-blue/theme.css"; //theme
 import "primevue/resources/primevue.min.css"; //core css
@@ -42,6 +43,7 @@ app.component('Dialog', Dialog);
 app.component('Avatar', Avatar);
 app.component('DonuttelloLogo', DonuttelloLogo);
 app.component('Menu', Menu);
+app.component('Card', Card);
 
 app.use(router);
 

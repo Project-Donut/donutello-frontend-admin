@@ -12,14 +12,18 @@
     outline: var(--primary-heaven-fade) solid 2px;
 }
 
-.label {
-    font-family: 'Dosis', sans-serif;
-    font-size: var(--font-size-regular);
-    margin-bottom: .5em;
+.form-group .input {
+    width: 100%;
 }
 
 .form-group:last-of-type {
     margin-bottom: .75em;
+}
+
+.label {
+    font-family: 'Dosis', sans-serif;
+    font-size: var(--font-size-regular);
+    margin-bottom: .5em;
 }
 
 .error-message {

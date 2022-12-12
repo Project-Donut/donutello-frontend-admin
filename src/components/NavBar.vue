@@ -4,7 +4,7 @@
             <DonuttelloLogo alt />
         </div>
         <template v-if="!state.loading">
-            <Avatar size="medium" style="cursor: pointer;" :label="state.user.username" shape="circle" @click="clickAvatar">{{state?.user?.username?.toUpperCase().charAt(0)}}</Avatar>
+            <Avatar size="large" style="cursor: pointer;" :label="state.user.username" shape="circle" @click="clickAvatar">{{state?.user?.username?.toUpperCase().charAt(0)}}</Avatar>
             <Menu ref="menu" :model="items" :popup="true" />
         </template>
     </nav>
