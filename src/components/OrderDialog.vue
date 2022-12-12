@@ -3,8 +3,8 @@
         :breakpoints="{ '960px': '75vw', '640px': '90vw' }" :style="{ width: '50vw' }" @hide="$emit('close')">
         <div class="order__status__wrapper">
             <label>Status</label>
-            <Dropdown v-model="state.edit.status" @change="filterCallback" :options="statusOptions" placeholder="Any"
-                class="p-column-filter">
+            <Dropdown v-model="state.edit.status" :options="statusOptions" placeholder="Any"
+                class="p-column-filter" style="width: 10em">
                 <template #value="slotProps">
                     <div style="margin: .5em 0em">
                         <span :class="'status-badge status-badge--' + trimStatus(slotProps.value)">
@@ -20,102 +20,95 @@
                 </template>
             </Dropdown>
         </div>
-        <h2>Bestelling</h2>
-        <div class="order__content">
-            <span>
-                <label>Levertijd</label>
-                <Inplace :closable="true">
-                    <template #display>
-                        {{ formatDate(state.order.dateBy) }}
-                    </template>
-                    <template #content>
+        <div class="lineup">
+            <h2>Bestelling</h2>
+            <button v-if="!state.editMode" :onClick="startEdit" class="button button--warning button--subtle"><i class="pi pi-pencil"/> Edit</button>
+            <button v-else :onClick="undoEdit" class="button button--error button--subtle"><i class="pi pi-undo"/> Undo</button>
+        </div>
+        
+        <Inplace :disabled="!state.editMode" :active="state.editMode">
+            <template #display>
+                <div class="order__content">
+                    <span>
+                        <label>Levertijd</label>
+                        <div>{{ formatDate(state.order.dateBy) }}</div>
+                    </span>
+                    <span>
+                        <label>Hoeveelheid</label>
+                        <div>{{ state.order.count }}</div>
+                    </span>
+                </div>
+                <h2>Informatie Klant</h2>
+                <div class="order__content">
+                    <span>
+                        <label>Bedrijf</label>
+                        <div> {{ state.order.customer.company}}</div>
+                    </span>
+                    <span>
+                        <label>Naam</label>
+                        <div> {{ state.order.customer.fullName}}</div>
+                    </span>
+                    <span>
+                        <label>Telefoonnummer</label>
+                        <div> {{ state.order.customer.phone}}</div>
+                    </span>
+                    <span>
+                        <label>Email</label>
+                        <div> {{ state.order.customer.email}}</div>
+                    </span>
+                    <span>
+                        <label>Lever Adres</label>
+                        <div> {{ state.order.address}}</div>
+                    </span>
+                    <span>
+                        <label>Factuuradres</label>
+                        <div> {{ state.order.customer.billingAddress}}</div>
+                    </span>
+                </div>
+            </template>
+            <template #content>
+                <div class="order__content">
+                    <span>
+                        <label>Levertijd</label>
                         <Calendar :showTime="true" v-model="state.edit.dateBy" />
-                    </template>
-                </Inplace>
-            </span>
-            <span>
-                <label>Hoeveelheid</label>
-                <Inplace :closable="true">
-                    <template #display>
-                        {{ state.order.count }}
-                    </template>
-                    <template #content>
+                    </span>
+                    <span>
+                        <label>Hoeveelheid</label>
                         <NumberInput v-model="state.edit.count" />
-                    </template>
-                </Inplace>
-            </span>
-        </div>
-        <h2>Informatie Klant</h2>
-        <div class="order__content">
-            <span>
-                <label>Bedrijf</label>
-                <Inplace :active="state.toggle2" @open="onToggle2">
-                    <template #display>
-                        {{ state.order.customer.company }}
-                    </template>
-                    <template #content>
-                        <TextInput v-model="state.edit.customer.company" autoFocus class=".input" />
-                    </template>
-                </Inplace>
-            </span>
-            <span>
-                <label>Naam</label>
-                <Inplace :active="state.toggle2">
-                    <template #display>
-                        {{ state.order.customer.fullName }}
-                    </template>
-                    <template #content>
-                        <TextInput v-model="state.edit.customer.fullName" autoFocus class=".input" />
-                    </template>
-                </Inplace>
-            </span>
-            <span>
-                <label>Telefoonnummer</label>
-                <Inplace :active="state.toggle2">
-                    <template #display>
-                        {{ state.order.customer.phone }}
-                    </template>
-                    <template #content>
-                        <TextInput v-model="state.edit.customer.phone" autoFocus class=".input" />
-                    </template>
-                </Inplace>
-            </span>
-            <span>
-                <label>Email</label>
-                <Inplace :active="state.toggle2">
-                    <template #display>
-                        {{ state.order.customer.email }}
-                    </template>
-                    <template #content>
-                        <TextInput v-model="state.edit.customer.email" autoFocus class=".input" />
-                    </template>
-                </Inplace>
-            </span>
-            <span>
-                <label>Lever Adres</label>
-                <Inplace :active="state.toggle2">
-                    <template #display>
-                        {{ state.order.address }}
-                    </template>
-                    <template #content>
-                        <TextInput v-model="state.edit.address" autoFocus class=".input" />
-                    </template>
-                </Inplace>
-            </span>
-            <span>
-                <label>Factuuradres</label>
-                <Inplace :active="state.toggle2">
-                    <template #display>
-                        {{ state.order.customer.billingAddress }}
-                    </template>
-                    <template #content>
-                        <TextInput v-model="state.edit.customer.billingAddress" autoFocus class=".input" />
-                    </template>
-                </Inplace>
-            </span>
-        </div>
+                    </span>
+                </div>
+                <h2>Informatie Klant</h2>
+                <div class="order__content">
+                    <span>
+                        <label>Bedrijf</label>
+                        <TextInput v-model="state.edit.customer.company" autoFocus />
+                    </span>
+                    <span>
+                        <label>Naam</label>
+                        <TextInput v-model="state.edit.customer.fullName" autoFocus />
+                    </span>
+                    <span>
+                        <label>Telefoonnummer</label>
+                        <TextInput v-model="state.edit.customer.phone" autoFocus />
+                    </span>
+                    <span>
+                        <label>Email</label>
+                        <TextInput v-model="state.edit.customer.email" autoFocus />
+                    </span>
+                    <span>
+                        <label>Lever Adres</label>
+                        <TextInput v-model="state.edit.address" autoFocus />
+                    </span>
+                    <span>
+                        <label>Factuuradres</label>
+                        <TextInput v-model="state.edit.customer.billingAddress" autoFocus />
+                    </span>
+                </div>
+            </template>
+        </Inplace>
         <template #footer>
-            <button :disabled="edit !== state.order" class="button button--success">Save</button>
+            <button v-if="state.editMode" :onClick="cancelEdit" class="button button--error button--subtle">Close</button>
+            <button v-if="state.editMode" :onClick="saveChanges" class="button button--success">Save</button>
         </template>
     </Dialog>
 </template>
@@ -128,12 +121,12 @@ const props = defineProps({
     order: Object,
     open: Boolean
 });
+
 const state = reactive({
     open: props.open,
     order: props.order,
     edit: props.order,
-    toggle1: false,
-    toggle2: false,
+    editMode: false
 });
 const emits = defineEmits(['close']);
 
@@ -148,13 +141,28 @@ const header = computed(() => {
     return `Bestelling ${customer}`;
 })
 
-const onToggle2 = e => {
-    console.log(e);
+const hasChanges = computed(() => {
+    return state.edit !== state.order || state.edit.customer !== state.order.customer;
+})
+
+const startEdit = () => {
+    state.edit = Object.assign({}, state.order);
+    state.editMode = true;
 }
 
-onMounted(() => {
+const undoEdit = () => {
     state.edit = Object.assign({}, state.order);
-});
+}
+
+const cancelEdit = () => {
+    state.edit = Object.assign({}, state.order);
+    state.editMode = false;
+}
+
+const saveChanges = () => {
+    state.order = Object.assign({}, state.edit);
+    state.editMode = false;
+}
 </script>
 
 <style scoped>
@@ -166,6 +174,7 @@ onMounted(() => {
 .order__content {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
 }
 
 label {
@@ -173,8 +182,26 @@ label {
 }
 
 h2 {
-    margin: 0;
-    margin-bottom: .25em;
+    margin: .75em 0 0.25em 0;
+}
+
+.lineup {
+    display: flex;
+    justify-content: space-between;
+}
+
+.lineup h2 {
+    width: fit-content;
+}
+
+.lineup .button {
+    margin-top: auto;
+    margin-bottom: 0px;
+}
+
+.order__content span {
+    display: flex;
+    flex-direction: column;
 }
 </style>
 <style>
@@ -184,5 +211,14 @@ h2 {
 
 .order-dialog .p-inplace-display {
     width: 100%;
+}
+
+.p-inplace-display.p-disabled {
+    opacity: 1!important;
+}
+
+.order__content .p-calendar .p-inputtext,
+.order__content .p-inputnumber .p-inputtext {
+    width: auto;
 }
 </style>
