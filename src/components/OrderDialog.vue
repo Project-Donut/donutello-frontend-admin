@@ -115,8 +115,10 @@
 
 <script setup>
 import { computed, defineProps, defineEmits, reactive, watch, onMounted } from 'vue';
-import { formatDate } from '../js/formatDate';
 import { trimStatus, statusOptions } from '../js/trimStatus';
+import { formatDate } from '../js/formatDate';
+import { putOrder } from '../api/order';
+
 const props = defineProps({
     order: Object,
     open: Boolean
@@ -128,7 +130,7 @@ const state = reactive({
     edit: props.order,
     editMode: false
 });
-const emits = defineEmits(['close']);
+const emits = defineEmits(['close', 'update']);
 
 watch(() => props.open, (current) => state.open = current);
 watch(() => props.order, (current) => {
@@ -160,8 +162,12 @@ const cancelEdit = () => {
 }
 
 const saveChanges = () => {
-    state.order = Object.assign({}, state.edit);
-    state.editMode = false;
+    const result = putOrder(state.edit);
+    if (result) {
+        state.order = Object.assign({}, state.edit);
+        $emit('update', state.order);
+        state.editMode = false;
+    }
 }
 </script>
 
