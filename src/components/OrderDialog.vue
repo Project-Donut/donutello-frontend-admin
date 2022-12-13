@@ -37,6 +37,29 @@
                         <label>Hoeveelheid</label>
                         <div>{{ state.order.count }}</div>
                     </span>
+                    <span>
+                        <label>Glazuur</label>
+                        <div>{{ state.order.donut.icingFlavour}}</div>
+                    </span>
+                    <span>
+                        <label>Vulling</label>
+                        <div>{{ state.order.donut.fillingFlavour}}</div>
+                    </span>
+                    <span>
+                        <label>Soort Toppings</label>
+                        <div>{{ state.order.donut.toppingType }}</div>
+                    </span>
+                    <span>
+                        <label>Smaak Toppings</label>
+                        <div v-if="state.order.donut.toppingType === 'Geen'">Geen</div>
+                        <div v-if="state.order.donut.toppingType === 'Crumble'">{{ state.order.donut.crumbleFlavour}}</div>
+                        <div v-else>{{ state.order.donut.toppingColour}}</div>
+                    </span>
+                    <span class="order__label-image__container">
+                        <label>Afbeelding Label</label>
+                        <img class="order__label-image" v-if="state.order.donut.logoImage !== ''" :src="state.order.donut.logoImage" alt="Image to be displayed on donut label"/>
+                    </span>
+                    
                 </div>
                 <h2>Informatie Klant</h2>
                 <div class="order__content">
@@ -199,6 +222,16 @@ const onStatusUpdate = async () => {
 
 label {
     font-weight: 600;
+}
+.order__label-image__container {
+    background-color: var(--gray-light-1);
+}
+.order__label-image__container label {
+    background-color: white;
+}
+.order__label-image {
+    margin: 1em;
+    width: 100px;
 }
 
 h2 {
