@@ -4,7 +4,7 @@
         <div class="order__status__wrapper">
             <label>Status</label>
             <Dropdown v-model="state.edit.status" :options="statusOptions" placeholder="Any"
-                class="p-column-filter" style="width: 10em">
+                class="p-column-filter" style="width: 10em" @change="onStatusUpdate">
                 <template #value="slotProps">
                     <div style="margin: .5em 0em">
                         <span :class="'status-badge status-badge--' + trimStatus(slotProps.value)">
@@ -161,12 +161,26 @@ const cancelEdit = () => {
     state.editMode = false;
 }
 
-const saveChanges = () => {
-    const result = putOrder(state.edit);
-    if (result) {
+const saveChanges = async () => {
+    const result = await putOrder(state.edit);
+    console.log(result);
+    if (result.status === "success") {
         state.order = Object.assign({}, state.edit);
         emit('update', state.order);
         state.editMode = false;
+    }
+}
+
+const onStatusUpdate = async () => {
+    const statusObject = {
+        status: state.edit.status,
+        _id: state.order._id
+    }
+    const result = await putOrder(statusObject);
+    console.log(result);
+    if (result) {
+        state.order.status = state.edit.status;
+        emit('update', state.order);
     }
 }
 </script>
